@@ -1,21 +1,24 @@
-﻿using BooksShop.Models;
+﻿using BooksShop.Data;
+using BooksShop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace BooksShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly BooksShopDbContext context;        
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(BooksShopDbContext context)
         {
-            _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var items = context.Books.Include(x => x.Category).Include(x => x.Author).ToList();
+            return View(items);
         }
 
         public IActionResult Privacy()

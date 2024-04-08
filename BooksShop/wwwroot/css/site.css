@@ -20,3 +20,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#book-table td img {
+    border-radius: 6px;
+    transition: .3s;
+}
+
+#book-table td img:hover {
+    transform: scale(3);
+}
+
+.card img {
+    object-fit: contain;
+    margin: 6px;
+}

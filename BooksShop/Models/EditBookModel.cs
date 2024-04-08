@@ -1,20 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BooksShop.Data.Entities
+namespace BooksShop.Models
 {
-    public class Book
+    public class EditBookModel
     {
-        public int Id { get; set; }        
+        public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Discount { get; set; }
-        public bool InStock { get; set; }        
+        public bool InStock { get; set; }
+        [Url]
         public string? ImageUrl { get; set; }
         public int Quantity { get; set; }
         public int Year { get; set; }
         public int CategoryId { get; set; }
-        public Category? Category { get; set; }
         public int AuthorId { get; set; }
-        public Author? Author { get; set; }
     }
 }
