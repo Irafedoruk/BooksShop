@@ -11,7 +11,7 @@ namespace BooksShop.Models
         public bool InStock { get; set; }
         [Url]
         public string? ImageUrl { get; set; }
-        public int Quantity { get; set; }
+        //public int Quantity { get; set; }
         public int Year { get; set; }
         public int CategoryId { get; set; }
         public int AuthorId { get; set; }

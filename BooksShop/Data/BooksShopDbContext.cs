@@ -14,12 +14,7 @@ namespace BooksShop.Data
             
         }
         public BooksShopDbContext(DbContextOptions options) : base(options) { }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    base.OnConfiguring(optionsBuilder);
-        //    var connStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BooksShop;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //    optionsBuilder.UseSqlServer(connStr);
-        //}
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -56,43 +51,43 @@ namespace BooksShop.Data
             {
                 new Book() { Id = 1, Name = "Малим дітям про все на світі", Price = 470, Discount = 5, InStock = true, 
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/m/a/malim-ditjam-pro-vse-na-sviti-enciklopedija-v-kazkah_2.webp", 
-                    Quantity = 10, Year = 2021, CategoryId = 1, AuthorId = 1},
+                    Year = 2021, CategoryId = 1, AuthorId = 1},
                 new Book() { Id = 2, Name = "Лізла жаба по драбині", Price = 320, Discount = 10, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/l/i/lizla-zhaba-po-drabini.webp",
-                    Quantity = 5, Year = 2023, CategoryId = 1, AuthorId = 1},
+                    Year = 2023, CategoryId = 1, AuthorId = 1},
                 new Book() { Id = 3, Name = "Гаррі Поттер і філософський камінь (Частина 1)", Price = 320, Discount = 0, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/285x395/g/a/garri-potter-i-filosovs-kij-kamin-chastina-1_3.webp",
-                    Quantity = 12, Year = 2020, CategoryId = 1, AuthorId = 2},
+                    Year = 2020, CategoryId = 1, AuthorId = 2},
                 new Book() { Id = 4, Name = "Гаррі Поттер і таємна кімната (Частина 2)", Price = 320, Discount = 5, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/g/a/garri-potter-i-taemna-kimnata-chastina-2_3.webp",
-                    Quantity = 8, Year = 2021, CategoryId = 1, AuthorId = 2},
+                    Year = 2021, CategoryId = 1, AuthorId = 2},
                 new Book() { Id = 5, Name = "Казковий ліс", Price = 400, Discount = 15, InStock = false,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/k/a/kazkovij-lis-prigodi-enotiv-beshketnikiv.webp",
-                    Quantity = 0, Year = 2021, CategoryId = 1, AuthorId = 3},
+                    Year = 2021, CategoryId = 1, AuthorId = 3},
                 new Book() { Id = 6, Name = "Триста поезій", Price = 350, Discount = 0, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/3/0/300-poezij_3.webp",
-                    Quantity = 20, Year = 2012, CategoryId = 2, AuthorId = 4},
+                    Year = 2012, CategoryId = 2, AuthorId = 4},
                 new Book() { Id = 7, Name = "Маруся Чурай", Price = 350, Discount = 0, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/m/a/marusja-churaj_7.webp",
-                    Quantity = 10, Year = 2018, CategoryId = 2, AuthorId = 4},
+                    Year = 2018, CategoryId = 2, AuthorId = 4},
                 new Book() { Id = 8, Name = "Ми готуємось до школи", Price = 175, Discount = 0, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/m/i/mi-gotuemos-do-shkoli-krok-do-shkoli_2.webp",
-                    Quantity = 11, Year = 2024, CategoryId = 3, AuthorId = 5},
+                    Year = 2024, CategoryId = 3, AuthorId = 5},
                 new Book() { Id = 9, Name = "Буквар для дошкільнят", Price = 140, Discount = 5, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/b/u/bukvar-dlja-doshkil-njat-chitajlik-a4-korablik_4.webp",
-                    Quantity = 8, Year = 2015, CategoryId = 3, AuthorId = 5},
+                    Year = 2015, CategoryId = 3, AuthorId = 5},
                 new Book() { Id = 10, Name = "Вісім релігій, що панують у світі", Price = 250, Discount = 15, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/285x395/v/i/visim-religij-scho-panujut-u-sviti-chomu-ihni-vidminnosti-majut-znachennja_8.webp",
-                    Quantity = 1, Year = 2022, CategoryId = 4, AuthorId = 6},
+                    Year = 2022, CategoryId = 4, AuthorId = 6},
                 new Book() { Id = 11, Name = "Бушкрафт", Price = 290, Discount = 0, InStock = false,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/b/u/bushkraft-najvazhlivishi-navichki-dlja-vizhivannja-v-dikij-prirodi_1.webp",
-                    Quantity = 0, Year = 2023, CategoryId = 5, AuthorId = 7},
+                    Year = 2023, CategoryId = 5, AuthorId = 7},
                 new Book() { Id = 12, Name = "Бачити українською", Price = 350, Discount = 0, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/285x395/b/a/bachiti-ukrains-koju_2.webp",
-                    Quantity = 16, Year = 2024, CategoryId = 5, AuthorId = 8},
+                    Year = 2024, CategoryId = 5, AuthorId = 8},
                 new Book() { Id = 13, Name = "Чути українською", Price = 290, Discount = 0, InStock = true,
                     ImageUrl = "https://bookopt.com.ua/media/catalog/product/cache/image/850x/c/h/chuti-ukrains-koju-u-sviti-zvuki-u-i-bukv_2.webp",
-                    Quantity = 13, Year = 2024, CategoryId = 5, AuthorId = 8}
+                    Year = 2024, CategoryId = 5, AuthorId = 8}
             });
         }
         public DbSet<Book> Books { get; set; }

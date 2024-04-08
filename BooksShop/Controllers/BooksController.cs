@@ -1,4 +1,5 @@
-﻿using BooksShop.Data;
+﻿using AutoMapper;
+using BooksShop.Data;
 using BooksShop.Data.Entities;
 using BooksShop.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,12 @@ namespace BooksShop.Controllers
     public class BooksController : Controller
     {
         private BooksShopDbContext context;
-        
-        public BooksController(BooksShopDbContext context)
+        private readonly IMapper mapper;
+
+        public BooksController(BooksShopDbContext context, IMapper mapper)
         {
             this.context = context;
-            
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -46,19 +48,18 @@ namespace BooksShop.Controllers
                 return View(model);
             }
 
-            var entity = new Book()
-            {
-                Name = model.Name,
-                Price = model.Price,
-                Discount = model.Discount,
-                InStock = model.InStock,
-                ImageUrl = model.ImageUrl,
-                Quantity = model.Quantity,
-                Year = model.Year,
-                CategoryId = model.CategoryId,
-                AuthorId = model.AuthorId
-            };
-
+            //var entity = new Book()
+            //{
+            //    Name = model.Name,
+            //    Price = model.Price,
+            //    Discount = model.Discount,
+            //    InStock = model.InStock,
+            //    ImageUrl = model.ImageUrl,                
+            //    Year = model.Year,
+            //    CategoryId = model.CategoryId,
+            //    AuthorId = model.AuthorId
+            //};
+            var entity = mapper.Map<Book>(model);
             context.Books.Add(entity);
             context.SaveChanges();
 
@@ -72,18 +73,18 @@ namespace BooksShop.Controllers
             LoadCategories();
             LoadAuthors();
 
-            var model = new EditBookModel()
-            {
-                Name = item.Name,
-                Price = item.Price,
-                Discount = item.Discount,
-                InStock = item.InStock,
-                ImageUrl = item.ImageUrl,
-                Quantity = item.Quantity,
-                Year = item.Year,
-                CategoryId = item.CategoryId,
-                AuthorId = item.AuthorId
-            };
+            //var model = new EditBookModel()
+            //{
+            //    Name = item.Name,
+            //    Price = item.Price,
+            //    Discount = item.Discount,
+            //    InStock = item.InStock,
+            //    ImageUrl = item.ImageUrl,
+            //    Year = item.Year,
+            //    CategoryId = item.CategoryId,
+            //    AuthorId = item.AuthorId
+            //};
+            var model = mapper.Map<EditBookModel>(item);
 
             return View(model);
         }
@@ -97,19 +98,20 @@ namespace BooksShop.Controllers
                 return View(model);
             }
 
-            var entity = new Book()
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Price = model.Price,
-                Discount = model.Discount,
-                InStock = model.InStock,
-                ImageUrl = model.ImageUrl,
-                Quantity = model.Quantity,
-                Year = model.Year,
-                CategoryId = model.CategoryId,
-                AuthorId = model.AuthorId
-            };
+            //var entity = new Book()
+            //{
+            //    Id = model.Id,
+            //    Name = model.Name,
+            //    Price = model.Price,
+            //    Discount = model.Discount,
+            //    InStock = model.InStock,
+            //    ImageUrl = model.ImageUrl,
+            //    //Quantity = model.Quantity,
+            //    Year = model.Year,
+            //    CategoryId = model.CategoryId,
+            //    AuthorId = model.AuthorId
+            //};
+            var entity = mapper.Map<Book>(model);
 
             context.Books.Update(entity);
             context.SaveChanges();
@@ -136,7 +138,7 @@ namespace BooksShop.Controllers
                             .Include(x => x.Category)
                             .Where(x => x.CategoryId == categoryId)
                             .ToList();
-
+            LoadAuthors();
             LoadCategories();
             return View("Index", books);
         }
