@@ -23,8 +23,7 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
-            <th scope="col">Status</th>
-            @*<th scope="col">Quantity</th>*@
+            <th scope="col">Status</th>            
             <th scope="col">Year</th>
             <th scope="col">Category</th>
             <th scope="col">Author</th>
@@ -67,8 +66,7 @@
                     {
                         <span class="badge bg-secondary">Out of Stock</span>
                     }
-                </td>
-                @* <td>@i.Quantity</td>*@
+                </td>                
                 <td>@i.Year</td>
                 <td>@(i.Category?.Name ?? "not loaded")</td>
                 <td>@(i.Author?.Name ?? "not loaded")</td>

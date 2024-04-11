@@ -32,20 +32,22 @@ namespace BooksShop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Creation = true;
             LoadCategories();
             LoadAuthors();
 
-            return View();
+            return View("Upsert");
         }
 
         [HttpPost]
-        public IActionResult Create(CreateBookModel model)
+        public IActionResult Create(BookFormModel model)
         {
             if (!ModelState.IsValid)
             {
                 LoadCategories();
                 LoadAuthors();
-                return View(model);
+                ViewBag.Creation = true;
+                return View("Upsert", model);
             }
 
             //var entity = new Book()
@@ -70,6 +72,7 @@ namespace BooksShop.Controllers
             var item = context.Books.Find(id);
             if (item == null) return NotFound();
 
+            ViewBag.Creation = false;
             LoadCategories();
             LoadAuthors();
 
@@ -84,18 +87,19 @@ namespace BooksShop.Controllers
             //    CategoryId = item.CategoryId,
             //    AuthorId = item.AuthorId
             //};
-            var model = mapper.Map<EditBookModel>(item);
+            var model = mapper.Map<BookFormModel>(item);
 
-            return View(model);
+            return View("Upsert", model);
         }
         [HttpPost]
-        public IActionResult Edit(EditBookModel model)
+        public IActionResult Edit(BookFormModel model)
         {
             if (!ModelState.IsValid)
             {
                 LoadCategories();
                 LoadAuthors();
-                return View(model);
+                ViewBag.Creation = false;
+                return View("Upsert", model);
             }
 
             //var entity = new Book()

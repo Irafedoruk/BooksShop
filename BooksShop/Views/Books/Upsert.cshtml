@@ -1,7 +1,10 @@
-﻿@model CreateBookModel;
-<h2>Додати книгу</h2>
+﻿@model BookFormModel;
+@{
+    bool isCreate = ViewBag.Creation ?? false;
+}
+<h2>@(isCreate ? "Додати" : "Змінити") книгу</h2>
 
-<form class="row g-3" asp-action="Create" method="post">
+<form class="row g-3" asp-action="@(isCreate ? "Create" : "Edit")" method="post">
     <div class="col-md-12">
         <label asp-for=Name class="form-label">Name</label>
         <input asp-for="Name" type="text" class="form-control" placeholder="Enter book name">
@@ -29,14 +32,6 @@
         <input asp-for=ImageUrl type="url" class="form-control" placeholder="Enter book image address" id="inputEmail4">
         <span asp-validation-for=ImageUrl class="small text-danger"></span>
     </div>
-    @*<div class="col-md-4">
-        <label asp-for=Quantity class="form-label">Quantity</label>
-        <div class="input-group">
-            <span class="input-group-text">шт</span>
-            <input asp-for=Quantity type="number" min="0" class="form-control" placeholder="Enter book quantity">
-        </div>
-        <span asp-validation-for=Quantity class="small text-danger"></span>
-    </div>*@
     <div class="col-md-4">
         <label asp-for=Year class="form-label">Year</label>
         <div class="input-group">
@@ -59,7 +54,7 @@
             <option selected>Choose...</option>
         </select>
         <span asp-validation-for=AuthorId class="small text-danger"></span>
-    </div>    
+    </div>
 
     <div class="col-12">
         <div class="form-check">
@@ -74,6 +69,13 @@
         <a asp-action="Index" class="btn btn-dark w-100">Go Back</a>
     </div>
     <div class="col-6">
-        <button type="submit" class="btn btn-success w-100">Create</button>
+        @if (isCreate)
+        {
+            <button type="submit" class="btn btn-success w-100">Create</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-warning w-100">Edit</button>
+        }
     </div>
 </form>

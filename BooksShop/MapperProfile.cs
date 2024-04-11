@@ -7,9 +7,9 @@ namespace BooksShop
     public class MapperProfile : Profile
     {
         public MapperProfile()
-        {
-            CreateMap<CreateBookModel, Book>();
-            CreateMap<EditBookModel, Book>().ReverseMap();            
+        {            
+            CreateMap<BookFormModel, Book>().ReverseMap();            
+            CreateMap<Book, BookCartModel>();            
         }
     }
 }
