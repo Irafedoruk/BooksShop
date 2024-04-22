@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BooksShop.Data
 {
-    public class BooksShopDbContext : IdentityDbContext
+    public class BooksShopDbContext : IdentityDbContext<User>
     {
         public BooksShopDbContext()
         {

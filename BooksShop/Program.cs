@@ -2,6 +2,7 @@ using BooksShop.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
+using BooksShop.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BooksShopDbContext>(opt => opt.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BooksShopDbContext>();
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BooksShopDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDistributedMemoryCache();
