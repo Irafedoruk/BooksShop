@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BooksShop.Data
 {
-    public class BooksShopDbContext : DbContext
+    public class BooksShopDbContext : IdentityDbContext
     {
         public BooksShopDbContext()
         {
@@ -18,6 +19,8 @@ namespace BooksShop.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Book>().Property(x=>x.Quantity).HasDefaultValue(0);
 
             modelBuilder.Entity<Category>().HasData(new[]
             {

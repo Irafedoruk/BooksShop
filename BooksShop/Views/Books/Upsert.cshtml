@@ -55,16 +55,14 @@
         </select>
         <span asp-validation-for=AuthorId class="small text-danger"></span>
     </div>
-
-    <div class="col-12">
-        <div class="form-check">
-            <input asp-for=InStock class="form-check-input" type="checkbox" id="gridCheck">
-            <label asp-for=InStock class="form-check-label" for="gridCheck">
-                In Stock
-            </label>
+    <div class="col-md-4">
+        <label asp-for=Quantity class="form-label">Quantity</label>
+        <div class="input-group">
+            <span class="input-group-text">шт</span>
+            <input asp-for=Quantity type="number" min="0" class="form-control" placeholder="Enter book quantity">
         </div>
+        <span asp-validation-for=Quantity class="small text-danger"></span>
     </div>
-
     <div class="col-6">
         <a asp-action="Index" class="btn btn-dark w-100">Go Back</a>
     </div>

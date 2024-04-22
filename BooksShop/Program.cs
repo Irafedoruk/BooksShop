@@ -1,6 +1,7 @@
 using BooksShop.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ string connStr = builder.Configuration.GetConnectionString("LocalDb")!;
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BooksShopDbContext>(opt => opt.UseSqlServer(connStr));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BooksShopDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDistributedMemoryCache();
@@ -39,6 +42,7 @@ app.UseAuthorization();
 
 app.UseSession();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

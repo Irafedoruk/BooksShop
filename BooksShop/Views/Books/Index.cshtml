@@ -23,10 +23,11 @@
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
-            <th scope="col">Status</th>            
             <th scope="col">Year</th>
             <th scope="col">Category</th>
             <th scope="col">Author</th>
+            <th scope="col">Status</th>            
+            <th scope="col">Quantity</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -57,6 +58,19 @@
                     @(i.Price - (i.Price * i.Discount / 100M))грн
                 </td>                
                 <td>@i.Discount%</td>
+                @*<td>
+                    @if (i.InStock)
+                    {
+                        <span class="badge bg-success">In Stock</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    }
+                </td>  *@              
+                <td>@i.Year</td>
+                <td>@(i.Category?.Name ?? "not loaded")</td>
+                <td>@(i.Author?.Name ?? "not loaded")</td>
                 <td>
                     @if (i.InStock)
                     {
@@ -66,10 +80,8 @@
                     {
                         <span class="badge bg-secondary">Out of Stock</span>
                     }
-                </td>                
-                <td>@i.Year</td>
-                <td>@(i.Category?.Name ?? "not loaded")</td>
-                <td>@(i.Author?.Name ?? "not loaded")</td>
+                </td>
+                <td>@i.Quantity</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-secondary">
