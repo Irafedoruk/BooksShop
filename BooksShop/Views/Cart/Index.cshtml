@@ -40,7 +40,11 @@
                         </div>
                         @*<span class="badge bg-primary rounded-pill">@(i.CountToBuy)шт</span>*@
                     </div>
-                    <span class="badge bg-secondary me-2 rounded-pill">@(i.CountToBuy)шт</span>
+                    <div>
+                        <a><i class="btn bi bi-dash"></i></a>
+                        <span class="badge bg-secondary rounded-pill">@(i.CountToBuy)шт</span>
+                        <a asp-controller="Cart" asp-action="Append" asp-route-id="@i.Id" asp-route-returnUrl="@Context.Request.Path"><i class="btn bi bi-plus"></i></a>
+                    </div>
                     <span class="badge bg-primary rounded-pill">@(i.Price * i.CountToBuy) грн</span>
                 </li>
             }

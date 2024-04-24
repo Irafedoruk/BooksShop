@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using BooksShop.Data.Entities;
+using BooksShop.Extensions;
+using BooksShop.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<BooksShopDbContext>(opt => opt.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BooksShopDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
+    .AddEntityFrameworkStores<BooksShopDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddDistributedMemoryCache();
@@ -24,7 +29,17 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddScoped<ICartService, CartService>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;    
+
+    SeedExtensions.SeedRoles(serviceProvider).Wait();
+    SeedExtensions.SeedAdmin(serviceProvider).Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

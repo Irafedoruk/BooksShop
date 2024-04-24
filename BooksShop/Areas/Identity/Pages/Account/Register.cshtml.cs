@@ -101,6 +101,9 @@ namespace BooksShop.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Admin User")]
+            public bool AdminUser { get; set; }
         }
 
 
@@ -125,6 +128,15 @@ namespace BooksShop.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (User.IsInRole(Roles.ADMIN) && Input.AdminUser)
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.ADMIN);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.USER);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
