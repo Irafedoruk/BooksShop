@@ -26,8 +26,22 @@ namespace BooksShop.Services
             // якщо корзина порожня, створюємо список
             if (items == null) items = new Dictionary<int, int>();
 
-            var product = context.Books.Find(id);
-            // product.Quantity;
+            // Отримуємо дані про книгу з бази даних
+            var book = context.Books.Find(id);
+
+            // Перевіряємо, чи книга існує та чи вона доступна для продажу
+            if (book == null || !book.InStock)
+            {
+                // Якщо книга не існує або не доступна, нічого не робимо
+                return;
+            }
+
+            // Перевіряємо, чи кількість продуктів, яку користувач хоче додати, доступна
+            if (book.Quantity < count)
+            {
+                // Якщо книги немає в достатній кількості, нічого не робимо
+                return;
+            }
 
             // якщо елемент вже в корзині, тоді збільшуємо кількість
             if (items.ContainsKey(id)) items[id] += count;

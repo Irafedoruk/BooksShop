@@ -51,18 +51,7 @@ namespace BooksShop.Controllers
                 ViewBag.Creation = true;
                 return View("Upsert", model);
             }
-
-            //var entity = new Book()
-            //{
-            //    Name = model.Name,
-            //    Price = model.Price,
-            //    Discount = model.Discount,
-            //    InStock = model.InStock,
-            //    ImageUrl = model.ImageUrl,                
-            //    Year = model.Year,
-            //    CategoryId = model.CategoryId,
-            //    AuthorId = model.AuthorId
-            //};
+            
             var entity = mapper.Map<Book>(model);
             context.Books.Add(entity);
             context.SaveChanges();
